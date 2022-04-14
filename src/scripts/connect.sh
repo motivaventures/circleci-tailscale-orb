@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eu
 
@@ -21,4 +21,4 @@ if [ "$CAN_ROOT" != "1" ]; then
   exit 1
 fi
 
-$SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${HTTP_PROXY_PORT} --socks5-server=localhost:${SOCKS5_PROXY_PORT} 2>~/tailscaled.log
+$SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${HTTP_PROXY_PORT} --socks5-server=localhost:${SOCKS5_PROXY_PORT} 2>~/tailscaled.log &

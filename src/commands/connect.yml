@@ -14,6 +14,5 @@ steps:
       environment:
         HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
         SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
-      background: true
       name: Tailscale Connect
       command: <<include(scripts/connect.sh)>>
