@@ -1,10 +1,10 @@
 version: 2.1
 
 description: >
-  Integrate to your Tailscale network via [Userspace networking](https://tailscale.com/kb/1112/userspace-networking/) mode. Provides both a SOCKS5 and HTTP proxy to integrate with your tailscale network.
+  Integrate to your Tailscale network via Userspace networking (https://tailscale.com/kb/1112/userspace-networking/) mode. Provides both a SOCKS5 and HTTP proxy to integrate with your tailscale network.
   Also integrates proxychains to force SOCKS5 proxy connections.
 
-  Follow the instructions here for obtaining an ephemeral auth key: [https://tailscale.com/kb/1111/ephemeral-nodes/](https://tailscale.com/kb/1111/ephemeral-nodes/)
+  Follow the instructions here for obtaining an ephemeral auth key: https://tailscale.com/kb/1111/ephemeral-nodes/
 
 display:
   source_url: "https://github.com/motivaventures/circleci-tailscale-orb"
