@@ -37,4 +37,5 @@ done
   echo "export https_proxy=http://localhost:1054/"
 } >> $BASH_ENV
 
-. "${BASH_ENV}"
+# shellcheck source=/dev/null
+source "${BASH_ENV}"
