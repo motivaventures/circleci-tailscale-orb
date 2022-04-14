@@ -7,7 +7,7 @@ description: >
   Follow the instructions here for obtaining an ephemeral auth key: [https://tailscale.com/kb/1111/ephemeral-nodes/](https://tailscale.com/kb/1111/ephemeral-nodes/)
 
 display:
-  source_url: "https://www.github.com/motivaventures/circleci-tailscale-orb"
+  source_url: "https://github.com/motivaventures/circleci-tailscale-orb"
 
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
 # orbs:
