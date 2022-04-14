@@ -16,7 +16,7 @@ parameters:
 steps:
   - run:
       environment:
-        TAILSCALE_AUTH_KEY: ${{ tailscale-auth-key>>
+        TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
         HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
         SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
       name: Run Tailscale Agent
