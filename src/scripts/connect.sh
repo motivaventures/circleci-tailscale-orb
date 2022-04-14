@@ -24,6 +24,7 @@ fi
 $SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${HTTP_PROXY_PORT} --socks5-server=localhost:${SOCKS5_PROXY_PORT} 2>~/tailscaled.log &
 
 HOSTNAME="circleci-$(cat /etc/hostname)"
+echo ${TAILSCALE_AUTH_KEY}
 until $SUDO tailscale up --authkey ${TAILSCALE_AUTH_KEY} --hostname=${HOSTNAME} --accept-routes=true
 do
   sleep 1
