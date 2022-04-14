@@ -1,6 +1,10 @@
 description: >
-  This command echos "Hello World" using file inclusion.
+  This command will start Tailscale in userspace networking mode
 parameters:
+  tailscale-auth-key:
+    type: env_var_name
+    description: Tailscale authentication key from the admin panel (Ephemeral key)
+    default: TAILSCALE_AUTH_KEY
   http-proxy-port:
     type: string
     default: "1054"
@@ -12,7 +16,8 @@ parameters:
 steps:
   - run:
       environment:
+        TAILSCALE_AUTH_KEY: ${{ tailscale-auth-key>>
         HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
         SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
-      name: Tailscale Connect
+      name: Run Tailscale Agent
       command: <<include(scripts/connect.sh)>>
