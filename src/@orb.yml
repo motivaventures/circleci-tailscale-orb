@@ -1,13 +1,12 @@
 version: 2.1
 
 description: >
-  Sample orb description
-# What will your orb allow users to accomplish?
-# Descriptions should be short, simple, and informative.
+  Integrate to your Tailscale network via [Userspace networking](https://tailscale.com/kb/1112/userspace-networking/) mode. Provides both a SOCKS5 and HTTP proxy to integrate with your tailscale network.
+  Also integrates proxychains to force SOCKS5 proxy connections.
 
-# This information will be displayed in the orb registry and is not mandatory.
+  Follow the instructions here for obtaining an ephemeral auth key: [https://tailscale.com/kb/1111/ephemeral-nodes/](https://tailscale.com/kb/1111/ephemeral-nodes/)
+
 display:
-  home_url: "https://www.example.com/docs"
   source_url: "https://www.github.com/motivaventures/circleci-tailscale-orb"
 
 # If your orb requires other orbs, you can import them like this. Otherwise remove the "orbs" stanza.
