@@ -6,7 +6,7 @@ parameters:
     default: "1054"
     description: "HTTP proxy port"
   socks5-proxy-port:
-    type: string 
+    type: string
     default: "1055"
     description: "SOCKS5 proxy port"
 steps:
@@ -15,5 +15,5 @@ steps:
         HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
         SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
       background: true
-      name: Hello Greeting
+      name: Tailscale Connect
       command: <<include(scripts/connect.sh)>>
