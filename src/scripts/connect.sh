@@ -21,11 +21,11 @@ if [ "$CAN_ROOT" != "1" ]; then
   exit 1
 fi
 
-$SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:$HTTP_PROXY_PORT --socks5-server=localhost:$SOCKS5_PROXY_PORT 2>~/tailscaled.log &
+$SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:"${HTTP_PROXY_PORT}" --socks5-server=localhost:"${SOCKS5_PROXY_PORT}" 2>~/tailscaled.log &
 
 HOSTNAME="circleci-$(cat /etc/hostname)"
 
-$SUDO tailscale up --authkey=$TAILSCALE_AUTH_KEY --hostname=$HOSTNAME --accept-routes=true
+$SUDO tailscale up --authkey="${TAILSCALE_AUTH_KEY}" --hostname="${HOSTNAME}" --accept-routes=true
 
 {
   echo "export ALL_PROXY=socks5h://localhost:1055/"
@@ -36,4 +36,4 @@ $SUDO tailscale up --authkey=$TAILSCALE_AUTH_KEY --hostname=$HOSTNAME --accept-r
 } >> $BASH_ENV
 
 # shellcheck source=/dev/null
-source $BASH_ENV
+source "${BASH_ENV}"
