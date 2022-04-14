@@ -28,10 +28,13 @@ until $SUDO tailscale --socket=/tmp/tailscaled.sock up --authkey ${TAILSCALE_AUT
 do
   sleep 1
 done
-echo "export ALL_PROXY=socks5h://localhost:1055/" >> $BASH_ENV
-echo "export HTTP_PROXY=http://localhost:1054/" >> $BASH_ENV
-echo "export HTTPS_PROXY=http://localhost:1054/" >> $BASH_ENV
-echo "export http_proxy=http://localhost:1054/" >> $BASH_ENV
-echo "export https_proxy=http://localhost:1054/" >> $BASH_ENV
 
-source $BASH_ENV
+{
+  echo "export ALL_PROXY=socks5h://localhost:1055/"
+  echo "export HTTP_PROXY=http://localhost:1054/"
+  echo "export HTTPS_PROXY=http://localhost:1054/"
+  echo "export http_proxy=http://localhost:1054/"
+  echo "export https_proxy=http://localhost:1054/"
+} >> $BASH_ENV
+
+. "${BASH_ENV}"
