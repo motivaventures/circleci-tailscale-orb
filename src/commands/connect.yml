@@ -1,0 +1,19 @@
+description: >
+  This command echos "Hello World" using file inclusion.
+parameters:
+  http-proxy-port:
+    type: string
+    default: "1054"
+    description: "HTTP proxy port"
+  socks5-proxy-port:
+    type: string 
+    default: "1055"
+    description: "SOCKS5 proxy port"
+steps:
+  - run:
+      environment:
+        HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
+        SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
+      background: true
+      name: Hello Greeting
+      command: <<include(scripts/connect.sh)>>
