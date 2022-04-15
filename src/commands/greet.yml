@@ -16,6 +16,10 @@ parameters:
     default: "1054"
     description: "HTTP proxy port"
 steps:
+  - run: |
+      {
+        echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
+      } >> $BASH_ENV
   - run:
       environment:
         PARAM_TO: << parameters.to >>
