@@ -6,4 +6,4 @@ steps:
       name: Install proxychains
       command: |
         sudo apt update
-        sudo apt install -y proxychains
+        sudo apt install -y proxychains4
