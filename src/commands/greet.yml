@@ -7,9 +7,19 @@ parameters:
     type: string
     default: "World"
     description: "Hello to whom?"
+  tailscale-auth-key:
+    type: env_var_name
+    description: Tailscale authentication key from the admin panel (Ephemeral key)
+    default: TAILSCALE_AUTH_KEY
+  http-proxy-port:
+    type: string
+    default: "1054"
+    description: "HTTP proxy port"
 steps:
   - run:
       environment:
         PARAM_TO: <<parameters.to>>
+        TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
+        HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
       name: Hello Greeting
       command: <<include(scripts/greet.sh)>>
