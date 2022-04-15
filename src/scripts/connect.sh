@@ -21,6 +21,9 @@ if [ "$CAN_ROOT" != "1" ]; then
   exit 1
 fi
 
+# shellcheck source=/dev/null
+source "${BASH_ENV}"
+
 $SUDO tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:"${HTTP_PROXY_PORT}" --socks5-server=localhost:"${SOCKS5_PROXY_PORT}" 2>~/tailscaled.log &
 
 HOSTNAME="circleci-$(cat /etc/hostname)"
