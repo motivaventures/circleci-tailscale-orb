@@ -19,6 +19,7 @@ jobs:
         # - circleci-tailscale/greet
         - circleci-tailscale/install
         - circleci-tailscale/connect
+        - circleci-tailscale/proxychains
 workflows:
   test-deploy:
     jobs:
