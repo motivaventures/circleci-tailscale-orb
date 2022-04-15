@@ -18,8 +18,8 @@ parameters:
 steps:
   - run:
       environment:
-        PARAM_TO: <<parameters.to>>
-        TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
-        HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
+        PARAM_TO: << parameters.to >>
+        TAILSCALE_AUTH_KEY: << parameters.tailscale-auth-key >>
+        HTTP_PROXY_PORT: << parameters.http-proxy-port >>
       name: Hello Greeting
       command: <<include(scripts/greet.sh)>>
