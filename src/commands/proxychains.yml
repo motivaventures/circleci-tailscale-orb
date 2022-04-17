@@ -6,4 +6,16 @@ steps:
       name: Install proxychains
       command: |
         sudo apt update
-        sudo apt install -y proxychains4
+        sudo apt install -y proxychains-ng
+  - run:
+      name: Write proxychains config file
+      command: |
+        sudo tee ./proxychains.conf <<EOF
+        # proxychains.conf
+        #
+        # This file is used to configure the proxychains daemon.
+        #
+        # See the proxychains.conf
+        [ProxyList]
+        socks5  127.0.0.1 1055
+        EOF
