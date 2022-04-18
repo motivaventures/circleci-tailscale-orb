@@ -23,7 +23,7 @@ steps:
       name: Auth Tailscale
       command: |
         HOSTNAME="circleci-$(cat /etc/hostname)"
-        until sudo tailscaled up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
+        until sudo tailscale up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
         do
           echo "Waiting for Tailscale to be ready..."
           sleep 1
