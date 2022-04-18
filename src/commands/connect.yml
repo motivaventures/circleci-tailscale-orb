@@ -31,14 +31,3 @@ steps:
   - run:
       name: Export Proxy Env Vars
       command: <<include(scripts/export-proxy-env-vars.sh)>>
-  # - run: |
-  #     {
-  #       echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
-  #     } >> $BASH_ENV
-  # - run:
-  #     environment:
-  #       TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
-  #       HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
-  #       SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
-  #     name: Run Tailscale Agent
-  #     command: <<include(scripts/connect.sh)>>

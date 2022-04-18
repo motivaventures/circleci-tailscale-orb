@@ -16,7 +16,6 @@ jobs:
       steps:
         - checkout
         # Run your orb's commands to validate them.
-        # - circleci-tailscale/greet
         - circleci-tailscale/install
         - circleci-tailscale/connect
         - circleci-tailscale/proxychains
