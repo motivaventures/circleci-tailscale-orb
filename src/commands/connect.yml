@@ -26,17 +26,7 @@ steps:
         sudo tailscaled up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
   - run:
       name: Export Proxy Env Vars
-      command: |
-        {
-          echo "export ALL_PROXY=socks5h://localhost:1055/"
-          echo "export HTTP_PROXY=http://localhost:1054/"
-          echo "export HTTPS_PROXY=http://localhost:1054/"
-          echo "export http_proxy=http://localhost:1054/"
-          echo "export https_proxy=http://localhost:1054/"
-        } >> $BASH_ENV
-
-        # shellcheck source=/dev/null
-        source $BASH_ENV
+      command: <<include(scripts/export-proxy-env-vars.sh)>>
   # - run: |
   #     {
   #       echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
