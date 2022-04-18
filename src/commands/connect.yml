@@ -15,20 +15,19 @@ parameters:
     description: "SOCKS5 proxy port"
 steps:
   - run:
-      environment:
-        HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
-        SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
-      name: Run Tailscaled process
-      command: <<include(scripts/start-tailscaled.sh)>>
-  - run: |
-      {
-        echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
-      } >> $BASH_ENV
+      name: Run Tailscale agent
+      background: true
+      command: |
+        sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${<< parameters.http-proxy-port >>} --socks5-server=localhost:"${<< parameters.socks5-proxy-port >>}" 2>~/tailscaled.log
   - run:
-      environment:
-        TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
       name: Auth Tailscale
-      command: <<include(scripts/auth-tailscale-agent.sh)>>
+      command: |
+        HOSTNAME="circleci-$(cat /etc/hostname)"
+        until sudo tailscaled up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
+        do
+          echo "Waiting for Tailscale to be ready..."
+          sleep 1
+        done
   - run:
       name: Export Proxy Env Vars
       command: <<include(scripts/export-proxy-env-vars.sh)>>
