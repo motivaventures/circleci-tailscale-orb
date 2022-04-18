@@ -14,14 +14,37 @@ parameters:
     default: "1055"
     description: "SOCKS5 proxy port"
 steps:
-  - run: |
-      {
-        echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
-      } >> $BASH_ENV
   - run:
-      environment:
-        TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
-        HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
-        SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
-      name: Run Tailscale Agent
-      command: <<include(scripts/connect.sh)>>
+      name: Run Tailscale agent
+      background: true
+      command: |
+        sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${<< parameters.http-proxy-port >>} --socks5-server=localhost:"${<< parameters.socks5-proxy-port >>}" 2>~/tailscaled.log
+  - run:
+      name: Auth Tailscale
+      command: |
+        HOSTNAME="circleci-$(cat /etc/hostname)"
+        sudo tailscaled up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
+  - run:
+      name: Export Proxy Env Vars
+      command: |
+        {
+          echo "export ALL_PROXY=socks5h://localhost:1055/"
+          echo "export HTTP_PROXY=http://localhost:1054/"
+          echo "export HTTPS_PROXY=http://localhost:1054/"
+          echo "export http_proxy=http://localhost:1054/"
+          echo "export https_proxy=http://localhost:1054/"
+        } >> $BASH_ENV
+
+        # shellcheck source=/dev/null
+        source $BASH_ENV
+  # - run: |
+  #     {
+  #       echo "export TAILSCALE_AUTH_KEY=$TAILSCALE_AUTH_KEY"
+  #     } >> $BASH_ENV
+  # - run:
+  #     environment:
+  #       TAILSCALE_AUTH_KEY: <<parameters.tailscale-auth-key>>
+  #       HTTP_PROXY_PORT: <<parameters.http-proxy-port>>
+  #       SOCKS5_PROXY_PORT: <<parameters.socks5-proxy-port>>
+  #     name: Run Tailscale Agent
+  #     command: <<include(scripts/connect.sh)>>
