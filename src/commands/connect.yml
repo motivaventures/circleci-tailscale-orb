@@ -18,7 +18,7 @@ steps:
       name: Run Tailscale agent
       background: true
       command: |
-        sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:${<< parameters.http-proxy-port >>} --socks5-server=localhost:"${<< parameters.socks5-proxy-port >>}" 2>~/tailscaled.log
+        sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:<<parameters.http-proxy-port>> --socks5-server=localhost:<<parameters.socks5-proxy-port>> 2>~/tailscaled.log
   - run:
       name: Auth Tailscale
       command: |
