@@ -1,0 +1,33 @@
+description: >
+  This command will start Tailscale in userspace networking mode
+parameters:
+  tailscale-auth-key:
+    type: env_var_name
+    description: Tailscale authentication key from the admin panel (Ephemeral key)
+    default: TAILSCALE_AUTH_KEY
+  http-proxy-port:
+    type: string
+    default: "1054"
+    description: "HTTP proxy port"
+  socks5-proxy-port:
+    type: string
+    default: "1055"
+    description: "SOCKS5 proxy port"
+steps:
+  - run:
+      name: Run Tailscale agent
+      background: true
+      command: |
+        sudo tailscaled --tun=userspace-networking --outbound-http-proxy-listen=localhost:<<parameters.http-proxy-port>> --socks5-server=localhost:<<parameters.socks5-proxy-port>> 2>~/tailscaled.log
+  - run:
+      name: Auth Tailscale
+      command: |
+        HOSTNAME="circleci-$(cat /etc/hostname)"
+        until sudo tailscale up --authkey=${<< parameters.tailscale-auth-key >>} --hostname=${HOSTNAME} --accept-routes=true
+        do
+          echo "Waiting for Tailscale to be ready..."
+          sleep 1
+        done
+  - run:
+      name: Export Proxy Env Vars
+      command: <<include(scripts/export-proxy-env-vars.sh)>>

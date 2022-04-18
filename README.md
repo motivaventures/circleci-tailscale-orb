@@ -1,15 +1,12 @@
-# Orb Template
+# CircleCI Orb for using Tailscale
 
 
 [![CircleCI Build Status](https://circleci.com/gh/motivaventures/circleci-tailscale-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/motivaventures/circleci-tailscale-orb) [![CircleCI Orb Version](https://badges.circleci.com/orbs/motivaventures/circleci-tailscale.svg)](https://circleci.com/orbs/registry/orb/motivaventures/circleci-tailscale) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/motivaventures/circleci-tailscale-orb/master/LICENSE) [![CircleCI Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com/c/ecosystem/orbs)
 
 
 
-A project template for Orbs.
-
-This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
-
-_**Edit this area to include a custom title and description.**_
+This CircleCI Orb is for connecting to Tailscale network.  This is largely based on the awesome work by [ThreeComma](https://github.com/threecommaio/circleci-tailscale) but with changes necessary for usage in our pipelines.
+The specific use-case here is that we needed to connected resources behind a Tailscale subnet router.  Our specific solution is to force network requests through the SOCKS proxy given the used application code lib does not adhere to the ALL_PROXY environment variables.
 
 ---
 

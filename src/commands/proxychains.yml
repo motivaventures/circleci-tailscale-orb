@@ -1,0 +1,12 @@
+description: >
+  Install proxychains
+
+steps:
+  - run:
+      name: Install proxychains
+      command: |
+        sudo apt update
+        sudo apt install -y proxychains4
+  - run:
+      name: Write proxychains config file
+      command: <<include(scripts/proxychains.sh)>>
